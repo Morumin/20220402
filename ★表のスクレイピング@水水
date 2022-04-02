@@ -1,0 +1,32 @@
+import selenium
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+import traceback
+
+driver = webdriver.Edge(executable_path="C:\\Users\\IMF\\Downloads\\edgedriver_win64\\msedgedriver.exe")
+driver.get("http://www1.river.go.jp/cgi-bin/SiteInfoDetail.exe?ID=309061289901110")
+
+
+tableElem = driver.find_element(By.XPATH,'/html/body/center[2]/table/tbody')
+trs = tableElem.find_elements(By.TAG_NAME,"tr")
+
+#lenは1,2と数える0でない
+    
+try:
+    for i in range(1,len(trs)):
+        tds = trs[i].find_elements(By.TAG_NAME,"td")# sがないとlen()エラーがでる,tdは二つの要素がはいってる
+        line = ""
+        for j in range(0,len(tds)):    #ここにlineを入れると入れるとtdsの数分なのでずれる
+            if j == len(tds)-1:         #何回forが回ってるか意識 tdsは0,1,2
+                line += str(tds[j].text) #tdsに0が入らないと要素がとれない。rangeは0から
+            else:
+                line += str(tds[j].text)+str('     ')
+        print(line)
+except:
+    traceback.print_exc()
+finally:
+    if driver is not None:
+        driver.quit()
+        
+ 
+ strは,とかでもOK
