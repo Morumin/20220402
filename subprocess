@@ -1,0 +1,30 @@
+#https://srbrnote.work/archives/6701#toc3
+#参考ページ
+
+import subprocess
+
+
+# "Windowsの場合"
+# subprocess.run('dir', shell=True)
+
+
+# Windowsの場合、shell=Trueにするとスペース区切りが使えるようになるのは同じなんですが、shell=Trueでもlistを正常に受け取れちゃいます。
+
+place = '絶対パスexe実行'
+
+"シェルスクリプト(バッチファイル)を実行する"
+result = subprocess.run(['python', '絶対パス\\pyroad.py'],shell=True)
+print(result)
+
+
+
+cmd = (
+    exe_file,
+    '-d', system_dic_dir,
+    '-u', dic_file,
+    '-f', 'utf8',
+    '-t', 'utf8',
+    src_file,
+        )
+
+cp = subprocess.run(cmd, stdout=sys.stdout, stderr=sys.stderr)
