@@ -29,3 +29,33 @@ cmd = (
         )
 
 cp = subprocess.run(cmd, stdout=sys.stdout, stderr=sys.stderr)
+
+5月11日
+
+https://www.boukenki.info/python-gaibu-program-process-application-kidou-jikkou-houhou/#run
+
+subprocess.run([r”C:\Program Files (x86)\sakura\sakura.exe”,r”C:\Users\TARO\Documents\test.txt”])
+subprocess.Popen([r””C:\Program Files (x86)\sakura\sakura.exe”,r”C:\Users\TARO\Documents\test.txt”])
+
+
+
+https://hashikake.com/subprocess
+
+#①ライブラリをインポート
+import subprocess
+#②ファイルパスを設定
+excel = r'C:\Program Files (x86)\Microsoft Office¥Office12¥excel.exe' #②-①Excel
+images = r'C:\test\images' #②-②「images」フォルダ
+image = r'C:\test\tweet.png' #②-③「tweet.png」ファイル
+paint = r'C:\Windows\system32\mspaint.exe' #②-④ペイント
+chrome = r'C:\Program Files (x86)\Google\Chrome\Application\chrome.exe' #②-⑤GoogleChrome
+#③アプリケーションを開く
+subprocess.Popen(excel)
+#④フォルダを開く
+subprocess.Popen(['explorer',images],shell=True)
+#⑤既定のプログラムでファイルを開く
+subprocess.Popen(['start',image],shell=True)
+#⑥指定したプログラムでファイルを開く
+subprocess.Popen([paint,image])
+#⑦ChromeでURLを開く
+subprocess.Popen([chrome,'https://google.com/'])
