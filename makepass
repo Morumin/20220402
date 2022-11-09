@@ -1,0 +1,18 @@
+import pandas as pd
+
+makepass = pd.read_excel('Book2.xlsx') #元ファイル
+
+passlist = []
+passlist2 = []
+
+for i , s in enumerate(makepass.index):
+    indexx = pd.date_range(makepass.iloc[i,1], makepass.iloc[i,2], freq='5T')
+    passlist.append(indexx.astype(str))
+    
+for j in passlist:
+    for k in j:
+        kaso = k[0:4]+k[5:7]+k[8:10]+k[11:13]+k[14:16]+k[17:19]
+        passlist2.append(f'{kaso}_aaaa')　　#実際のパス
+  
+
+pd.DataFrame(passlist2).to_excel('new.xlsx')
