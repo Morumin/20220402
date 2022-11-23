@@ -1,0 +1,37 @@
+import pandas as pd
+import glob
+
+
+data={
+'date_copy_data' : [],
+'copy_temp'  :  [],
+'copy_wind'  :  [],
+'copy_wind_s'  :  [],
+'copy_sun'  :  []
+}
+
+for csv in glob.glob('*.csv'):
+    df = pd.read_csv(csv, header=2, parse_dates=True, encoding='cp932')#index_col=0
+    df = df.drop([0,1])
+    for j, s in enumerate(df.index):
+        data['date_copy_data'].append(df.iloc[j,0])
+        data['copy_temp'].append(df.iloc[j,1])
+        data['copy_wind'].append(df.iloc[j,4])
+        data['copy_wind_s'].append(df.iloc[j,6])
+        data['copy_sun'].append(df.iloc[j,9])
+# df = pd.concat(data)
+pd.DataFrame(data).to_csv(f'day.csv', encoding='cp932')
+
+df = pd.read_csv('day.csv', index_col=0,header=0, parse_dates=True, encoding='cp932')
+df = df.drop_duplicates(subset='date_copy_data',keep='last')#keep='last', inplace=True
+# df = df.sort_values(by=['date_copy_data'],ascending=True, inplace=True)
+df = df.sort_values(['date_copy_data'],ascending=True, inplace=True)
+df.to_csv(f'dayyyyy.csv', encoding='cp932')
+# pd.DataFrame(df).to_csv(f'dayyy.csv', encoding='cp932')
+# print(df)
+
+
+
+
+        # dflist.append(df.iloc[])
+    # df = pd.concat(dflist,axis=1)
